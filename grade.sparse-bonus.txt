@@ -1,0 +1,57 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Grade: 0.00/4.00
+
+1 Deduction(s):
+
+- --------------
+#1: 4.00 points
+Failing test: test_mat_matrix_matrix_mult_sparse: 
+        We specify the point value for each test in the method comment string:
+        @points=4
+        
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/timeout_decorator/timeout_decorator.py", line 81, in new_function
+    return function(*args, **kwargs)
+  File "test_asg1b.py", line 67, in test_mat_matrix_matrix_mult_sparse
+    self.assertTrue( MN_s.f==MN_ss.f and MN_s.D==MN_ss.D)
+AttributeError: 'NoneType' object has no attribute 'f'
+
+source:
+    @timeout_decorator.timeout(40)
+     def test_mat_matrix_matrix_mult_sparse(self):
+         """
+         We specify the point value for each test in the method comment string:
+         @points=4
+         """
+         M = sps.random(30, 20, density=0.1, format='csc')
+         M.data[:] = 1
+         N = sps.random(20, 30, density=0.1, format='csc')
+         N.data[:] = 1
+         M_s = self.sps2sparseMat(M)
+         N_s = self.sps2sparseMat(N)
+         MN_s = M_s*N_s
+         MN = M.dot(N)
+         MN_ss = self.listlist2sparseMat(MN.toarray().tolist())
+         #MN_ss = self.sps2sparseMat(MN)
+         self.assertTrue( MN_s.f==MN_ss.f and MN_s.D==MN_ss.D)
+- --------------
+
+
+Metadata
+===================
+Assignment: asg1-vecmat
+Repo: ssh://git@git.imada.sdu.dk/DM561-DM562-2018/soboy16-repo
+Timestamp: 1542623492.7408576
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJb8pEEAAoJEKiHxn3oWX95S8gIAKnAdVKxfagSnB9lBfoqAI3w
+vFCU4SufStkXHusCemydIpBS8Q7qQOBmQhfXXvJDU9oOtw5kQ6EqFQw+Pnw22KkI
+1KC6luOji9vYYp/Om/g5g0+nEBY/3KrH6EwzrMSeDSFm/kWqWph6CAcK4SHjKPb9
+e1STr6OZm32/BMEO/FIUcSTMMK+kXxB7jnK3HYzfq3GiViY3diUibGvnrz6Kjy6e
+sb9eLmy/z+hw0C8zj3D8JXoR6MW5BEpDh/EfI2YH6nhfzm52Mle2YUXSfjt1whuW
+3SqM9kohLa/dc9iQXR7zHQTeu8SvIUkOqm03otzwbBzTdhkJaAXmwjQquzfQRJE=
+=zEod
+-----END PGP SIGNATURE-----
